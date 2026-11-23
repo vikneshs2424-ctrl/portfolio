@@ -36,7 +36,7 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite with `/futuristic-portfolio.html` appended, for example `http://localhost:5173/futuristic-portfolio.html`. The root URL serves the same standalone portfolio and visual style.
+Open the local URL printed by Vite: [http://localhost:5174/futuristic-portfolio.html](http://localhost:5174/futuristic-portfolio.html). Use the port shown by Vite if it differs. The root URL serves the same standalone portfolio and visual style.
 
 ## 4. Portfolio data and portrait
 
