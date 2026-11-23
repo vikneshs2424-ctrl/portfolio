@@ -1,22 +1,12 @@
-# Viknesh S — Full-Stack Portfolio
+# Viknesh S - Smart Temple Control Room Portfolio
 
-A React + Vite portfolio with an Express API, MongoDB database, and a protected admin dashboard.
+The standalone Smart Temple Control Room portfolio is the main site. It uses its own animated theme and effects and connects to an Express API backed by MongoDB.
 
 ## Requirements
-- Node.js (LTS) and npm
+- Node.js LTS and npm
 - MongoDB Community Server running locally, or a MongoDB Atlas connection string
-- VS Code
 
-## 1. Open the project
-Extract the ZIP, then open the `viknesh-portfolio` folder in VS Code.
-
-## 2. Start MongoDB
-If you installed MongoDB locally, start the MongoDB service from Windows Services (if it is not already running).
-Default local connection:
-`mongodb://127.0.0.1:27017/viknesh_portfolio`
-
-## 3. Configure the backend
-Open a terminal in VS Code:
+## 1. Configure the backend
 
 ```bash
 cd server
@@ -24,19 +14,21 @@ copy .env.example .env
 npm install
 ```
 
-Open `server/.env`. Change `JWT_SECRET` to a long random secret. Set `ADMIN_EMAIL` and `ADMIN_PASSWORD` to your own private admin credentials. Do not share this file or upload it to GitHub.
+Edit `server/.env`: set a long random `JWT_SECRET`, your admin email and password, and the correct `MONGO_URI`. Keep `.env` private; it is excluded from Git.
 
-Start the API:
+## 2. Start the standalone API
+
+In the `server` folder, run:
 
 ```bash
-npm run dev
+npm run dev:standalone
 ```
 
-The API runs at http://localhost:5000.
-Check it at http://localhost:5000/api/health.
+The API runs on port 5001. Check its database connection at `http://localhost:5001/api/health`.
 
-## 4. Start the frontend
-Open a **second** VS Code terminal:
+## 3. Start the main site
+
+In a second terminal:
 
 ```bash
 cd client
@@ -44,36 +36,14 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite, usually http://localhost:5173.
+Open the local URL printed by Vite with `/futuristic-portfolio.html` appended, for example `http://localhost:5173/futuristic-portfolio.html`. The root URL serves the same standalone portfolio and visual style.
 
-## 5. Admin dashboard
-Open `http://localhost:5173/admin` and sign in using the email/password you set in `server/.env`.
-From the dashboard you can add, edit, and delete projects and update profile information.
+## 4. Portfolio data and portrait
 
-## 6. Add your profile photo
-Copy your photo into `client/public/` and name it `profile.jpg`.
-The portfolio automatically uses `/profile.jpg`. If you use another filename, update `client/src/App.jsx`.
+The page loads profile and project data from MongoDB. Contact form messages are stored in the `contacts` collection. Replace `client/public/viknesh-anime-character.png` with your portrait, keeping the same filename, or update its image path in `client/public/futuristic-portfolio.html`.
 
-## 7. Important notes
-- The first backend start creates the admin account from `.env` if it does not already exist.
-- Project and profile edits are stored in MongoDB.
-- The website is currently intended for local development. Before public deployment, use strong secrets, HTTPS, a production database, and proper hosting.
-- Never commit `.env` to GitHub.
-- This ZIP includes starter portfolio data based on the resume details supplied. Review and update any wording before publishing.
-
-## 8. Standalone Smart Temple Control Room portfolio
-The no-framework portfolio is the main site at `http://localhost:5173/`. It is also available at `http://localhost:5173/futuristic-portfolio.html`.
-
-In a separate terminal, start its API with:
-
-```bash
-cd server
-npm run dev:standalone
-```
-
-This API runs on port 5001 and uses the same `MONGO_URI` and database as the original API on port 5000. Its health endpoint is `http://localhost:5001/api/health`. The standalone page loads profile and project data from MongoDB, and contact form messages are stored in the `contacts` collection.
-
-## Troubleshooting (Windows PowerShell)
-If PowerShell blocks `npm.ps1`, use `npm.cmd install` and `npm.cmd run dev`, or open Command Prompt in VS Code.
-If the frontend says it cannot reach the API, make sure the backend terminal is still running on port 5000.
-If MongoDB connection fails, verify the MongoDB service is running and that `MONGO_URI` in `server/.env` is correct.
+## Notes
+- The first API start creates the admin account from `.env` if it does not already exist and seeds starter profile and project data when those collections are empty.
+- Never commit `.env` or publish secrets.
+- This setup is intended for local development. Use HTTPS, strong secrets, a production database, and proper hosting before public deployment.
+- If PowerShell blocks `npm.ps1`, use `npm.cmd install` and `npm.cmd run dev`, or use Command Prompt.
